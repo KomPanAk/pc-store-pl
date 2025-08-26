@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Store Poland - Komputery na zamówienie</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+            color: #fff;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(45deg, #00ff88, #0099ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(0, 255, 136, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: radial-gradient(circle at center, rgba(0, 255, 136, 0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(45deg, #00ff88, #0099ff);
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #fff;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 255, 136, 0.4);
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section h2 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            background: linear-gradient(45deg, #fff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .product-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 255, 136, 0.2);
+            border-color: rgba(0, 255, 136, 0.3);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            opacity: 0.7;
+        }
+
+        .product-title {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #00ff88;
+        }
+
+        .product-specs {
+            list-style: none;
+            margin-bottom: 1rem;
+        }
+
+        .product-specs li {
+            padding: 0.25rem 0;
+            opacity: 0.8;
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #00ff88;
+            margin-bottom: 1rem;
+        }
+
+        .custom-builder {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .component-selector {
+            margin-bottom: 1.5rem;
+        }
+
+        .component-selector label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        .component-selector select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .component-selector select option {
+            background: #1a1a2e;
+            color: #fff;
+        }
+
+        .total-price {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin: 1rem 0;
+            color: #00ff88;
+        }
+
+        .order-form {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #00ff88;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.3);
+            color: #fff;
+            font-size: 1rem;
+        }
+
+        .payment-options {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .payment-option {
+            flex: 1;
+            min-width: 200px;
+            padding: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .payment-option:hover,
+        .payment-option.selected {
+            border-color: #00ff88;
+            background: rgba(0, 255, 136, 0.1);
+        }
+
+        .payment-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        footer {
+            background: rgba(0, 0, 0, 0.5);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <div class="logo">PC Store PL</div>
+            <ul class="nav-links">
+                <li><a href="#home">Strona główna</a></li>
+                <li><a href="#prebuilts">Gotowe zestawy</a></li>
+                <li><a href="#custom">Konfigurator</a></li>
+                <li><a href="#contact">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="container">
+                <h1>Komputery PC na zamówienie</h1>
+                <p>Profesjonalne komputery gamingowe i robocze. Płatność gotówką lub BLIK.</p>
+                <div class="cta-buttons">
+                    <a href="#prebuilts" class="btn btn-primary">Zobacz gotowe zestawy</a>
+                    <a href="#custom" class="btn btn-secondary">Skonfiguruj własny PC</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="prebuilts" class="section">
+            <div class="container">
+                <h2>Gotowe zestawy komputerowe</h2>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-image">🎮</div>
+                        <h3 class="product-title">Gaming Basic</h3>
+                        <ul class="product-specs">
+                            <li>AMD Ryzen 5 5600X</li>
+                            <li>GeForce RTX 4060</li>
+                            <li>16GB DDR4 RAM</li>
+                            <li>500GB SSD NVMe</li>
+                            <li>B450M Motherboard</li>
+                        </ul>
+                        <div class="product-price">4,200 PLN</div>
+                        <button class="btn btn-primary" onclick="orderPrebuilt('Gaming Basic', 4200)">Zamów teraz</button>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">⚡</div>
+                        <h3 class="product-title">Gaming Pro</h3>
+                        <ul class="product-specs">
+                            <li>AMD Ryzen 7 5700X</li>
+                            <li>GeForce RTX 4070</li>
+                            <li>32GB DDR4 RAM</li>
+                            <li>1TB SSD NVMe</li>
+                            <li>B550 Motherboard</li>
+                        </ul>
+                        <div class="product-price">6,800 PLN</div>
+                        <button class="btn btn-primary" onclick="orderPrebuilt('Gaming Pro', 6800)">Zamów teraz</button>
+                    </div>
+
+                    <div class="product-card">
+                        <div class="product-image">🚀</div>
+                        <h3 class="product-title">Workstation Elite</h3>
+                        <ul class="product-specs">
+                            <li>AMD Ryzen 9 5900X</li>
+                            <li>GeForce RTX 4080</li>
+                            <li>64GB DDR4 RAM</li>
+                            <li>2TB SSD NVMe</li>
+                            <li>X570 Motherboard</li>
+                        </ul>
+                        <div class="product-price">12,500 PLN</div>
+                        <button class="btn btn-primary" onclick="orderPrebuilt('Workstation Elite', 12500)">Zamów teraz</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="custom" class="section">
+            <div class="container">
+                <h2>Konfigurator komputera</h2>
+                <div class="custom-builder">
+                    <div class="component-selector">
+                        <label for="cpu">Procesor (CPU)</label>
+                        <select id="cpu" onchange="updatePrice()">
+                            <option value="0">Wybierz procesor</option>
+                            <option value="800">AMD Ryzen 5 5600X - 800 PLN</option>
+                            <option value="1200">AMD Ryzen 7 5700X - 1200 PLN</option>
+                            <option value="2000">AMD Ryzen 9 5900X - 2000 PLN</option>
+                            <option value="900">Intel i5-12400F - 900 PLN</option>
+                            <option value="1400">Intel i7-12700F - 1400 PLN</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="gpu">Karta graficzna (GPU)</label>
+                        <select id="gpu" onchange="updatePrice()">
+                            <option value="0">Wybierz kartę graficzną</option>
+                            <option value="1200">GeForce RTX 4060 - 1200 PLN</option>
+                            <option value="2200">GeForce RTX 4070 - 2200 PLN</option>
+                            <option value="3500">GeForce RTX 4080 - 3500 PLN</option>
+                            <option value="1100">Radeon RX 7600 - 1100 PLN</option>
+                            <option value="2000">Radeon RX 7800 XT - 2000 PLN</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="ram">Pamięć RAM</label>
+                        <select id="ram" onchange="updatePrice()">
+                            <option value="0">Wybierz pamięć RAM</option>
+                            <option value="300">16GB DDR4 3200MHz - 300 PLN</option>
+                            <option value="600">32GB DDR4 3200MHz - 600 PLN</option>
+                            <option value="1200">64GB DDR4 3200MHz - 1200 PLN</option>
+                            <option value="400">16GB DDR5 5600MHz - 400 PLN</option>
+                            <option value="800">32GB DDR5 5600MHz - 800 PLN</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="storage">Dysk</label>
+                        <select id="storage" onchange="updatePrice()">
+                            <option value="0">Wybierz dysk</option>
+                            <option value="200">500GB SSD NVMe - 200 PLN</option>
+                            <option value="350">1TB SSD NVMe - 350 PLN</option>
+                            <option value="700">2TB SSD NVMe - 700 PLN</option>
+                            <option value="150">1TB HDD 7200RPM - 150 PLN</option>
+                            <option value="250">2TB HDD 7200RPM - 250 PLN</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="motherboard">Płyta główna</label>
+                        <select id="motherboard" onchange="updatePrice()">
+                            <option value="0">Wybierz płytę główną</option>
+                            <option value="400">B450M Micro-ATX - 400 PLN</option>
+                            <option value="600">B550 ATX - 600 PLN</option>
+                            <option value="900">X570 ATX - 900 PLN</option>
+                            <option value="500">B660M Micro-ATX - 500 PLN</option>
+                            <option value="700">Z690 ATX - 700 PLN</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="psu">Zasilacz</label>
+                        <select id="psu" onchange="updatePrice()">
+                            <option value="0">Wybierz zasilacz</option>
+                            <option value="300">600W 80+ Bronze - 300 PLN</option>
+                            <option value="450">750W 80+ Gold - 450 PLN</option>
+                            <option value="600">850W 80+ Gold - 600 PLN</option>
+                            <option value="800">1000W 80+ Platinum - 800 PLN</option>
+                        </select>
+                    </div>
+
+                    <div class="component-selector">
+                        <label for="case">Obudowa</label>
+                        <select id="case" onchange="updatePrice()">
+                            <option value="0">Wybierz obudowę</option>
+                            <option value="200">Mid Tower Basic - 200 PLN</option>
+                            <option value="350">Mid Tower RGB - 350 PLN</option>
+                            <option value="500">Full Tower Premium - 500 PLN</option>
+                            <option value="150">Micro ATX Compact - 150 PLN</option>
+                        </select>
+                    </div>
+
+                    <div class="total-price" id="totalPrice">
+                        Całkowita cena: 0 PLN
+                    </div>
+
+                    <button class="btn btn-primary" onclick="orderCustom()" id="orderCustomBtn" style="width: 100%; margin-top: 1rem;" disabled>
+                        Zamów skonfigurowany komputer
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <div id="orderForm" class="hidden">
+            <div class="container">
+                <div class="order-form">
+                    <h3>Formularz zamówienia</h3>
+                    <div class="form-group">
+                        <label for="customerName">Imię i nazwisko</label>
+                        <input type="text" id="customerName" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerPhone">Telefon</label>
+                        <input type="tel" id="customerPhone" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerEmail">Email</label>
+                        <input type="email" id="customerEmail" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="customerAddress">Adres dostawy</label>
+                        <textarea id="customerAddress" rows="3" required></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Metoda płatności</label>
+                        <div class="payment-options">
+                            <div class="payment-option" onclick="selectPayment('cash')">
+                                <div class="payment-icon">💵</div>
+                                <div>Gotówka przy odbiorze</div>
+                            </div>
+                            <div class="payment-option" onclick="selectPayment('blik')">
+                                <div class="payment-icon">📱</div>
+                                <div>BLIK</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="orderNotes">Uwagi do zamówienia</label>
+                        <textarea id="orderNotes" rows="3"></textarea>
+                    </div>
+
+                    <div id="orderSummary" style="background: rgba(0,255,136,0.1); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
+                    </div>
+
+                    <button class="btn btn-primary" onclick="submitOrder()" style="width: 100%;">
+                        Potwierdź zamówienie
+                    </button>
+                    
+                    <button class="btn btn-secondary" onclick="cancelOrder()" style="width: 100%; margin-top: 0.5rem;">
+                        Anuluj
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 PC Store Poland. Wszystkie prawa zastrzeżone.</p>
+            <p>Kontakt: +48 123 456 789 | info@pcstore.pl</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+        let currentOrder = null;
+        let selectedPayment = null;
+
+        // Initialize EmailJS
+        (function(){
+            emailjs.init("yKLOrJFiOY-MTrh8W"); // You'll need to replace this
+        })();
+
+        function updatePrice() {
+            const components = ['cpu', 'gpu', 'ram', 'storage', 'motherboard', 'psu', 'case'];
+            let total = 0;
+            let allSelected = true;
+
+            components.forEach(component => {
+                const select = document.getElementById(component);
+                const price = parseInt(select.value) || 0;
+                total += price;
+                if (price === 0) allSelected = false;
+            });
+
+            document.getElementById('totalPrice').textContent = `Całkowita cena: ${total.toLocaleString()} PLN`;
+            document.getElementById('orderCustomBtn').disabled = !allSelected || total === 0;
+        }
+
+        function orderPrebuilt(name, price) {
+            currentOrder = {
+                type: 'prebuilt',
+                name: name,
+                price: price,
+                specs: getPrebuiltSpecs(name)
+            };
+            showOrderForm();
+        }
+
+        function orderCustom() {
+            const components = ['cpu', 'gpu', 'ram', 'storage', 'motherboard', 'psu', 'case'];
+            let total = 0;
+            let specs = [];
+
+            components.forEach(component => {
+                const select = document.getElementById(component);
+                const option = select.options[select.selectedIndex];
+                if (select.value !== '0') {
+                    total += parseInt(select.value);
+                    specs.push(option.text);
+                }
+            });
+
+            currentOrder = {
+                type: 'custom',
+                name: 'Komputer skonfigurowany',
+                price: total,
+                specs: specs
+            };
+            showOrderForm();
+        }
+
+        function getPrebuiltSpecs(name) {
+            const specs = {
+                'Gaming Basic': ['AMD Ryzen 5 5600X', 'GeForce RTX 4060', '16GB DDR4 RAM', '500GB SSD NVMe', 'B450M Motherboard'],
+                'Gaming Pro': ['AMD Ryzen 7 5700X', 'GeForce RTX 4070', '32GB DDR4 RAM', '1TB SSD NVMe', 'B550 Motherboard'],
+                'Workstation Elite': ['AMD Ryzen 9 5900X', 'GeForce RTX 4080', '64GB DDR4 RAM', '2TB SSD NVMe', 'X570 Motherboard']
+            };
+            return specs[name] || [];
+        }
+
+        function showOrderForm() {
+            document.getElementById('orderForm').classList.remove('hidden');
+            document.getElementById('orderForm').scrollIntoView({ behavior: 'smooth' });
+            
+            const summary = `
+                <h4>Podsumowanie zamówienia:</h4>
+                <p><strong>${currentOrder.name}</strong></p>
+                <ul>
+                    ${currentOrder.specs.map(spec => `<li>${spec}</li>`).join('')}
+                </ul>
+                <p><strong>Cena całkowita: ${currentOrder.price.toLocaleString()} PLN</strong></p>
+            `;
+            document.getElementById('orderSummary').innerHTML = summary;
+        }
+
+        function selectPayment(type) {
+            selectedPayment = type;
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            event.target.closest('.payment-option').classList.add('selected');
+        }
+
+        function submitOrder() {
+            const name = document.getElementById('customerName').value;
+            const phone = document.getElementById('customerPhone').value;
+            const email = document.getElementById('customerEmail').value;
+            const address = document.getElementById('customerAddress').value;
+
+            if (!name || !phone || !email || !address || !selectedPayment) {
+                alert('Proszę wypełnić wszystkie wymagane pola i wybrać metodę płatności.');
+                return;
+            }
+
+            const orderData = {
+                customer: { name, phone, email, address },
+                order: currentOrder,
+                payment: selectedPayment,
+                notes: document.getElementById('orderNotes').value,
+                timestamp: new Date().toISOString()
+            };
+
+            // Prepare email template parameters
+            const emailParams = {
+                to_email: 'mikolajczyk838@gmail.com',
+                from_name: name,
+                customer_name: name,
+                customer_phone: phone,
+                customer_email: email,
+                customer_address: address,
+                order_type: currentOrder.type === 'prebuilt' ? 'Gotowy zestaw' : 'Komputer skonfigurowany',
+                order_name: currentOrder.name,
+                order_specs: currentOrder.specs.join('\n• '),
+                order_price: currentOrder.price.toLocaleString() + ' PLN',
+                payment_method: selectedPayment === 'cash' ? 'Gotówka przy odbiorze' : 'BLIK',
+                order_notes: document.getElementById('orderNotes').value || 'Brak uwag',
+                order_date: new Date().toLocaleDateString('pl-PL') + ' ' + new Date().toLocaleTimeString('pl-PL')
+            };
+
+            // Show loading state
+            const submitBtn = event.target;
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Wysyłanie...';
+            submitBtn.disabled = true;
+
+            // Send email via EmailJS
+            emailjs.send('service_aemimwa', 'template_3ss7g3y', emailParams)
+                .then(function(response) {
+                    console.log('Email sent successfully:', response);
+                    alert(`Dziękujemy za zamówienie!\n\nZamówienie: ${currentOrder.name}\nCena: ${currentOrder.price.toLocaleString()} PLN\nPłatność: ${selectedPayment === 'cash' ? 'Gotówka' : 'BLIK'}\n\nZamówienie zostało wysłane na email. Skontaktujemy się z Tobą w ciągu 24 godzin.`);
+                    cancelOrder();
+                }, function(error) {
+                    console.error('Email sending failed:', error);
+                    alert('Wystąpił błąd podczas wysyłania zamówienia. Spróbuj ponownie lub skontaktuj się telefonicznie: +48 123 456 789');
+                })
+                .finally(function() {
+                    // Restore button state
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
+        }
+
+        function cancelOrder() {
+            document.getElementById('orderForm').classList.add('hidden');
+            document.querySelectorAll('input, textarea').forEach(input => input.value = '');
+            document.querySelectorAll('.payment-option').forEach(option => option.classList.remove('selected'));
+            selectedPayment = null;
+            currentOrder = null;
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
